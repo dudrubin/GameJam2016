@@ -24,8 +24,7 @@ public class GameBorders : MonoBehaviour {
 		return (position.x > borderRight || position.x < borderLeft);
 	}
 
-	public static bool IsOutVerticaly(Vector3 position) {
-		Debug.LogFormat("{0} {1} {2}",position.y,borderBottom,borderTop);
+	public static bool IsOutVertical(Vector3 position) {
 		return (position.y < borderTop || position.y > borderBottom);
 	}
 
