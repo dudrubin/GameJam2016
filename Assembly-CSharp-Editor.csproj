@@ -47,6 +47,10 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\UnityConsulo\SimpleJSON.cs" />
      <Compile Include="Assets\Editor\UnityConsulo\UnityConsulo.cs" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween50.xml" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween46.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -82,6 +86,21 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

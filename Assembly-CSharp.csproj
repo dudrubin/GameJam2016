@@ -48,12 +48,30 @@
      <Compile Include="Assets\Cannon.cs" />
      <Compile Include="Assets\EmittersControl.cs" />
      <Compile Include="Assets\Enemy.cs" />
+     <Compile Include="Assets\Libraries\Demigiant\DOTween\Examples\Basics.cs" />
+     <Compile Include="Assets\Libraries\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween50.xml" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween46.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Libraries/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
