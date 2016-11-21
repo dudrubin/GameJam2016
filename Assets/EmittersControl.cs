@@ -40,7 +40,7 @@ public class EmittersControl : MonoBehaviour {
 		left.transform.localPosition = leftEmitter.localPosition;
 
 		float speed = 0.1f;
-		left.GetComponent<Enemy>().SetDirection(new Vector3(speed,-speed));
-		right.GetComponent<Enemy>().SetDirection(new Vector3(-speed,-speed));
+		left.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
+		right.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
 	}
 }

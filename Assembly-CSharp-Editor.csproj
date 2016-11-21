@@ -45,12 +45,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenAnimationInspector.cs" />
      <Compile Include="Assets\Editor\UnityConsulo\SimpleJSON.cs" />
      <Compile Include="Assets\Editor\UnityConsulo\UnityConsulo.cs" />
-     <None Include="Assets\Libraries\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween50.xml" />
-     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween43.xml" />
-     <None Include="Assets\Libraries\Demigiant\DOTween\DOTween46.xml" />
+     <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
+     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
+     <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
+     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
+     <None Include="Assets\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
+     <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -75,20 +80,32 @@
  <Reference Include="UnityEditor.TreeEditor">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
+ <Reference Include="DemiLib">
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
+ </Reference>
+ <Reference Include="DemiEditor">
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DemiLib/Core/Editor/DemiEditor.dll</HintPath>
+ </Reference>
  <Reference Include="DOTween">
- <HintPath>/Users/sahar/Projects/gamejam/Assets/Libraries/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
- <HintPath>/Users/sahar/Projects/gamejam/Assets/Libraries/Demigiant/DOTween/DOTween43.dll</HintPath>
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="DOTween46">
- <HintPath>/Users/sahar/Projects/gamejam/Assets/Libraries/Demigiant/DOTween/DOTween46.dll</HintPath>
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
  </Reference>
  <Reference Include="DOTween50">
- <HintPath>/Users/sahar/Projects/gamejam/Assets/Libraries/Demigiant/DOTween/DOTween50.dll</HintPath>
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
  <Reference Include="DOTweenEditor">
- <HintPath>/Users/sahar/Projects/gamejam/Assets/Libraries/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenPro">
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenProEditor">
+ <HintPath>/Users/sahar/Projects/gamejam/Assets/Demigiant/DOTweenPro/Editor/DOTweenProEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>

@@ -23,30 +23,21 @@ public class Enemy : MonoBehaviour {
 	void Awake() {
 		initEnergy = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");
+
 	}
 
 	/// <summary>
 	///
 	/// </summary>
 	/// <param name="v"></param>
-	public void SetDirection(Vector3 v) {
-		direction = v;
+	public void Create(Vector3[] path ) {
+		transform.DOPath (path , 5, PathType.CatmullRom, PathMode.TopDown2D, 10); 
 	}
 
 	void Update() {
-		Vector3 v = transform.localPosition;
-		v += direction;
-		transform.localPosition = v;
-		if (GameBorders.IsOutHorizontal(transform.localPosition)) {
-			direction.x *= -1;
-		}
-		if (GameBorders.IsOutVertical(transform.localPosition)) {
-			direction.y *= -1;
-		}
 	}
 
 	private void OnHealthChange(float oldEnergy, float newEnergy) {
-
 		if (oldEnergy > 0) {
 			newEnergy = Mathf.Max(0, newEnergy);
 			healthBar.DOScaleX(newEnergy / initEnergy, 0.2f).OnComplete(() => {
