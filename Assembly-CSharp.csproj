@@ -48,6 +48,7 @@
      <Compile Include="Assets\Cannon.cs" />
      <Compile Include="Assets\EmittersControl.cs" />
      <Compile Include="Assets\Enemy.cs" />
+     <Compile Include="Assets\GameBorders.cs" />
      <Compile Include="Assets\Libraries\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Libraries\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />

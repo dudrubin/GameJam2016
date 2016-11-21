@@ -20,13 +20,12 @@ public class EmittersControl : MonoBehaviour {
 	///
 	/// </summary>
 	public void NewWave() {
-		float waveDuration = 10;
+		float waveDuration = 7;
 		Sequence sequence = DOTween.Sequence();
 		sequence.Append(timerBAr.DOScaleX(1, 0.05f));
 		sequence.AppendCallback(Emit);
 		sequence.Append(timerBAr.DOScaleX(0, waveDuration));
 		sequence.AppendCallback(NewWave);
-
 	}
 
 	/// <summary>
@@ -35,9 +34,13 @@ public class EmittersControl : MonoBehaviour {
 	private void Emit() {
 		GameObject left = Instantiate(enemyBase) as GameObject;
 		GameObject right = Instantiate(enemyBase) as GameObject;
-		left.transform.SetParent(transform);
 		right.transform.SetParent(transform);
-		left.transform.localPosition = leftEmitter.localPosition;
 		right.transform.localPosition = rightEmitter.localPosition;
+		left.transform.SetParent(transform);
+		left.transform.localPosition = leftEmitter.localPosition;
+
+		float speed = 0.1f;
+		left.GetComponent<Enemy>().SetDirection(new Vector3(speed,-speed));
+		right.GetComponent<Enemy>().SetDirection(new Vector3(-speed,-speed));
 	}
 }
