@@ -6,12 +6,15 @@ public class Cannon : MonoBehaviour {
 	GameObject barrelRef;
 	Main gameRef;
 	List<GameObject> cannonProjectiles;
-	const int PROJECTILE_SPEED = 4;
+	BaseCannonMovement movementHandler;
+	float PROJECTILE_SPEED = 10;
+
 	// Use this for initialization
 	void Start () {
 		barrelRef = GameObject.Find ("Barrel");
 		gameRef = GetComponentInParent<Main> ();
 		cannonProjectiles = new List<GameObject> ();
+		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform});
 	}
 
 
@@ -20,14 +23,8 @@ public class Cannon : MonoBehaviour {
 		Vector2 pos;
 		if (!getTouchPos(out pos))
 			return;
-
-		float deltaX = barrelRef.transform.position.x - pos.x;
-		float deltaY = barrelRef.transform.position.y - pos.y;
-		float barrelAngle = -(float)(Mathf.Atan (deltaX / deltaY) * 180.0 / 3.14);
-		Debug.LogFormat ("barrel angle is {0}", barrelAngle);
-		barrelRef.transform.localEulerAngles = new Vector3 (){ x = 0, y = 0, z = barrelAngle };
+		movementHandler.RespondToInput (new Vector2[]{ pos });
 		createProjectile (barrelRef.transform.position, barrelRef.transform.localEulerAngles);
-
 	}
 
 	private void createProjectile(Vector2 pos, Vector3 angle){
