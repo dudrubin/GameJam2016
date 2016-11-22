@@ -6,7 +6,7 @@ public class Cannon : MonoBehaviour {
 	GameObject barrelRef;
 	Main gameRef;
 	List<GameObject> cannonProjectiles;
-	const int PROJECTILE_SPEED = 4;
+	const int PROJECTILE_SPEED = 10;
 	// Use this for initialization
 	void Start () {
 		barrelRef = GameObject.Find ("Barrel");
