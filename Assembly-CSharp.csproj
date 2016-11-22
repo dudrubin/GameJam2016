@@ -54,11 +54,16 @@
      <Compile Include="Assets\Scripts\BaseCannonMovement.cs" />
      <Compile Include="Assets\Scripts\Data\CannonProperties.cs" />
      <Compile Include="Assets\Scripts\Data\Cannons.cs" />
+     <Compile Include="Assets\Scripts\Data\EnemyType.cs" />
+     <Compile Include="Assets\Scripts\Data\Wave.cs" />
+     <Compile Include="Assets\Scripts\Data\WaveGenerator.cs" />
      <Compile Include="Assets\Scripts\DoubleCannon.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Shlomi.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Movement\MovementPaths.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\TripleCannon.cs" />
+     <Compile Include="Assets\Wiggle.cs" />
      <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
      <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
