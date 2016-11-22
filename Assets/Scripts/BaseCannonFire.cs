@@ -4,13 +4,16 @@ using System.Collections.Generic;
 
 public class BaseCannonFire
 {
+	
 	Transform[] barrelTransforms;
-	float projectileSpeed = 10;
+	CannonProperties cannonProperties;
 	List<GameObject> cannonProjectiles;
-	public BaseCannonFire (Transform[] barrelTransforms)
+	public BaseCannonFire (Transform[] barrelTransforms, CannonProperties properties)
 	{
 		this.barrelTransforms = barrelTransforms;
 		this.cannonProjectiles = new List<GameObject> (); 
+		this.cannonProperties = properties;
+		Debug.LogFormat ("Barrel position:{0}", barrelTransforms[0].position);
 	}
 
 	public virtual void RespondToInput(Vector2[] touchPoints){
@@ -20,11 +23,13 @@ public class BaseCannonFire
 			Projectile projectile = ProjectileObj.GetComponent<Projectile> ();
 			ProjectileObj.transform.position = barrelTransforms[0].position;
 			ProjectileObj.transform.localEulerAngles = angle;
-			Vector2 velocity = new Vector2 (-projectileSpeed * Mathf.Sin (angle.z * Mathf.Deg2Rad), projectileSpeed * Mathf.Cos (angle.z * Mathf.Deg2Rad));
+			Vector2 velocity = new Vector2 (-cannonProperties.baseProjectileSpeed * Mathf.Sin (angle.z * Mathf.Deg2Rad), cannonProperties.baseProjectileSpeed * Mathf.Cos (angle.z * Mathf.Deg2Rad));
 			projectile.SetVelocity (velocity);
+			projectile.SetDamage (cannonProperties.baseDamage);
 			cannonProjectiles.Add (ProjectileObj);
 		}
 	}
+		
 }
 
 

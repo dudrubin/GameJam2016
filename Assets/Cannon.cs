@@ -4,16 +4,16 @@ using System.Collections.Generic;
 public class Cannon : MonoBehaviour {
 
 	GameObject barrelRef;
-
 	BaseCannonMovement movementHandler;
 	BaseCannonFire fireHandler;
-
+	CannonProperties cannonProperties;
 
 	// Use this for initialization
 	void Start () {
 		barrelRef = GameObject.Find ("Barrel");
-		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform});
-		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform });
+		cannonProperties = Cannons.BASIC_CANNON;
+		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform}, cannonProperties);
+		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform }, cannonProperties);
 	}
 
 
@@ -22,8 +22,10 @@ public class Cannon : MonoBehaviour {
 		Vector2 pos;
 		if (!getTouchPos(out pos))
 			return;
-		movementHandler.RespondToInput (new Vector2[]{ pos });
-		fireHandler.RespondToInput (new Vector2[]{ pos });
+		movementHandler.RespondToInput (new Vector2[]{ pos }, () => {
+			fireHandler.RespondToInput (new Vector2[]{ pos });
+		});
+
 	}
 
 
