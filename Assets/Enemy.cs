@@ -35,7 +35,9 @@ public class Enemy : MonoBehaviour {
 	}
 
 	protected virtual void OnAwake(){
-		Debug.LogFormat("++++++++++");
+	}
+
+	protected virtual void OnHit(){
 	}
 
 	void Awake() {
@@ -84,6 +86,11 @@ public class Enemy : MonoBehaviour {
 		int floorIndex = (int) Math.Floor(timePassedInSeconds / singlePartDuration);
 		int ceilIndex = (int) Math.Ceiling(timePassedInSeconds / singlePartDuration);
 		return new Vector2(floorIndex, ceilIndex);
+	}
+
+	public void Hit(float damage) {
+		Health -= damage;
+		OnHit();
 	}
 
 	private void OnHealthChange(float oldEnergy, float newEnergy) {

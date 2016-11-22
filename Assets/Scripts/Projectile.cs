@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour {
 		Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
 		if (enemy != null) {
-			enemy.Health -= damage;
+			enemy.Hit(damage);
 		}
 
 		Kill();
