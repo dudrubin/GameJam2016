@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 	Vector2 velocity;
-
+	float lifeTime = 2;
 
 	// Use this for initialization
 	void Start () {
+		Invoke("Kill",lifeTime);
+	}
 
+	void Kill() {
+		Destroy(gameObject);
 	}
 
 	// Update is called once per frame
@@ -18,9 +22,16 @@ public class Projectile : MonoBehaviour {
 		//Debug.LogFormat ("posx:{0} posy:{1}", transform.position.x, transform.position.y);
 		//Debug.LogFormat ("deltax:{0} deltay:{1}", deltaX, deltaY);
 		//transform.Translate (new Vector2 (deltaX, deltaY));
+		//Debug.Log(GetComponent<BoxCollider2D>().IsTouchingLayers());
 	}
 
 	public void SetVelocity(Vector2 velocity){
 		this.velocity = velocity;
 	}
+
+	void OnTriggerEnter2D(Collider2D collision) {
+		Debug.LogFormat("AAA" +collision.gameObject.name);
+		Kill();
+	}
+
 }
