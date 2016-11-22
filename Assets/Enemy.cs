@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	static protected int TOTAL_ENEMIES= 0;
+	static public Action<int> OnEnemiesChange;
+
 	protected float initEnergy = 0;
 	private float health = 100;
 	private Vector3 direction = Vector3.zero;
@@ -36,11 +39,26 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void OnAwake(){
 	}
-
 	protected virtual void OnHit(){
 	}
+	protected virtual void BeforeDestroyed(){
+	}
+
+	void OnDestroy(){
+		TOTAL_ENEMIES--;
+		if (OnEnemiesChange != null) {
+			OnEnemiesChange(TOTAL_ENEMIES);
+		}
+
+		BeforeDestroyed();
+	}
+
 
 	void Awake() {
+		TOTAL_ENEMIES++;
+		if (OnEnemiesChange != null) {
+			OnEnemiesChange(TOTAL_ENEMIES);
+		}
 
 		initEnergy = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");

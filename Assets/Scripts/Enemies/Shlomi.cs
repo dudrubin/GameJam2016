@@ -11,6 +11,8 @@ namespace Enemies {
 		List<GameObject> images = new List<GameObject>();
 		List<GameObject> hurtImages = new List<GameObject>();
 		float evolutionTime = 4;
+		Tween evolveTween;
+		Tween hitTween;
 
 		protected override  void OnAwake() {
 			base.OnAwake();
@@ -21,17 +23,27 @@ namespace Enemies {
 			hurtImages.Add(transform.FindChild("ImageLevel2/Hurt").gameObject);
 			hurtImages.Add(transform.FindChild("ImageLevel3/Hurt").gameObject);
 			SetLevel();
-			DOVirtual.DelayedCall(evolutionTime,Evolve);
+			evolveTween = DOVirtual.DelayedCall(evolutionTime,Evolve);
+		}
+
+		protected override void BeforeDestroyed() {
+			if (evolveTween != null) {
+				evolveTween.Kill(false);
+			}
+			if (hitTween != null) {
+				hitTween.Kill(false);
+			}
+			base.OnHit();
 		}
 
 		protected override void OnHit() {
 			base.OnHit();
-
+			hitTween.Kill(false);
 			for (int i = 0; i < images.Count; i++) {
 				hurtImages[i].GetComponent<SpriteRenderer>().enabled = true;
 				images[i].GetComponent<SpriteRenderer>().enabled = false;
 			}
-			DOVirtual.DelayedCall(0.5f,()=>{
+			hitTween = DOVirtual.DelayedCall(0.5f,()=>{
 				for (int i = 0; i < images.Count; i++) {
 					hurtImages[i].GetComponent<SpriteRenderer>().enabled = false;
 					images[i].GetComponent<SpriteRenderer>().enabled = true;
@@ -48,7 +60,7 @@ namespace Enemies {
 			else {
 				Debug.LogFormat("evolve to {0}",level);
 				SetLevel();
-				DOVirtual.DelayedCall(evolutionTime,Evolve);
+				evolveTween = DOVirtual.DelayedCall(evolutionTime,Evolve);
 			}
 		}
 
