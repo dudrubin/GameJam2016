@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour {
 				new Vector2(-1.8f, 1.8f),
 				levels: (int)points,
 				rightToLeft: !RightToLeft);
+
 		float timeLeft = duration - GetPassedTimeSinceCreated();
 		left.GetComponent<Enemy>().StartMotion(leftPath, timeLeft,pathList);
 		right.GetComponent<Enemy>().StartMotion(rightPath, timeLeft,pathList);
