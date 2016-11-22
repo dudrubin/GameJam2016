@@ -58,11 +58,13 @@
      <Compile Include="Assets\Scripts\Data\Wave.cs" />
      <Compile Include="Assets\Scripts\Data\WaveGenerator.cs" />
      <Compile Include="Assets\Scripts\DoubleCannon.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Nezach.cs" />
      <Compile Include="Assets\Scripts\Enemies\Shlomi.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Movement\MovementPaths.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\TripleCannon.cs" />
+     <Compile Include="Assets\Splatter.cs" />
      <Compile Include="Assets\Wiggle.cs" />
      <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
      <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
