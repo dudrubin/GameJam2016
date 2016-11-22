@@ -7,10 +7,12 @@ public class BaseCannonMovement
 	Transform[] barrelTransforms;
 	CannonProperties cannonProperties;
 	Vector3 pivot;
+	float originalY;
 	public BaseCannonMovement ( Transform[] barrelTransforms , Vector3 pivot, CannonProperties properties )
 	{
 		this.barrelTransforms = barrelTransforms;
 		this.cannonProperties = properties;
+		originalY = barrelTransforms [0].localPosition.y;
 	}
 
 	public virtual void RespondToInput(Vector2[] touchPoints, Action doneCallback){
@@ -25,7 +27,7 @@ public class BaseCannonMovement
 				firingSequence.Insert (0, barrelTransform.parent.DOLocalRotate (new Vector3 (){ x = 0, y = 0, z = barrelAngle }, 
 					cannonProperties.baseTurnSpeed));
 			}
-			float originalY = barrelTransforms [0].localPosition.y;
+
 			foreach (Transform barrelTransform in this.barrelTransforms) {
 				firingSequence.Insert (cannonProperties.baseTurnSpeed, barrelTransform.DOLocalMoveY (originalY - 0.15f, 0.03f));
 			}
