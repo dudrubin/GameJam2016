@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class EmittersControl : MonoBehaviour {
@@ -6,7 +7,7 @@ public class EmittersControl : MonoBehaviour {
 	Transform leftEmitter;
 	Transform rightEmitter;
 	Transform timerBAr;
-	private Object enemyBase;
+	public static Object enemyBase;
 
 	void Awake() {
 		leftEmitter = transform.FindChild("EmitterLeft");
@@ -38,7 +39,13 @@ public class EmittersControl : MonoBehaviour {
 		right.transform.localPosition = rightEmitter.localPosition;
 		left.transform.SetParent(transform);
 		left.transform.localPosition = leftEmitter.localPosition;
-		left.GetComponent<Enemy>().Create(false);
-		right.GetComponent<Enemy>().Create(true);
+		Vector3 originalLeftPos = left.transform.localPosition;
+		Vector3 originalRightPos = right.transform.localPosition;
+		Vector2 width = new Vector2(-1.8f,1.8f);
+
+		List<Vector3> pathLeft = MovementPaths.CreateSnakePath(originalLeftPos,width, rightToLeft: false);
+		List<Vector3> pathRight = MovementPaths.CreateSnakePath(originalRightPos,width, rightToLeft: true);
+		left.GetComponent<Enemy>().StartMotion(pathLeft);
+		right.GetComponent<Enemy>().StartMotion(pathRight);
 	}
 }

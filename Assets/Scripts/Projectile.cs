@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 	Vector2 velocity;
-	public int Damage = 40;
+	public int Damage = 100;
 	private float lifeTime = 2;
 
 	// Use this for initialization
