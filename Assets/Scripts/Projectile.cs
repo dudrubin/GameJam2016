@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour {
 		float deltaX = Time.deltaTime * velocity.x;
 		float deltaY = Time.deltaTime * velocity.y;
 		transform.position = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
-		//Debug.LogFormat ("posx:{0} posy:{1}", transform.position.x, transform.position.y);
 		//Debug.Log(GetComponent<BoxCollider2D>().IsTouchingLayers());
 
 	}
@@ -40,10 +39,11 @@ public class Projectile : MonoBehaviour {
 	/// <param name="collision"></param>
 	void OnTriggerEnter2D(Collider2D collision) {
 
+		Debug.LogFormat("AAA" + collision.gameObject.name);
 		Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
 		if (enemy != null) {
-			enemy.Hit(damage);
+			enemy.Hit (damage);
 		}
 
 		Kill();
