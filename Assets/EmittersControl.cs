@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Data;
 using DG.Tweening;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class EmittersControl : MonoBehaviour {
 	///
 	/// </summary>
 	public void NewWave() {
-		float waveDuration = 7;
+		float waveDuration = 10;
 		Sequence sequence = DOTween.Sequence();
 		sequence.Append(timerBAr.DOScaleX(1, 0.05f));
 		sequence.AppendCallback(Emit);
@@ -33,19 +33,38 @@ public class EmittersControl : MonoBehaviour {
 	///
 	/// </summary>
 	private void Emit() {
-		GameObject left = Instantiate(enemyBase) as GameObject;
-		GameObject right = Instantiate(enemyBase) as GameObject;
-		right.transform.SetParent(transform);
-		right.transform.localPosition = rightEmitter.localPosition;
-		left.transform.SetParent(transform);
-		left.transform.localPosition = leftEmitter.localPosition;
-		Vector3 originalLeftPos = left.transform.localPosition;
-		Vector3 originalRightPos = right.transform.localPosition;
-		Vector2 width = new Vector2(-1.8f,1.8f);
+		CreateWave(WaveGenerator.GenerateWave(leftEmitter.localPosition,true));
+//		GameObject left = Instantiate(enemyBase) as GameObject;
+//		GameObject right = Instantiate(enemyBase) as GameObject;
+//		right.transform.SetParent(transform);
+//		right.transform.localPosition = rightEmitter.localPosition;
+//		left.transform.SetParent(transform);
+//		left.transform.localPosition = leftEmitter.localPosition;
+//		Vector3 originalLeftPos = left.transform.localPosition;
+//		Vector3 originalRightPos = right.transform.localPosition;
+//		Vector2 width = new Vector2(-1.8f,1.8f);
+//
+//		List<Vector3> pathLeft = MovementPaths.CreateSnakePath(originalLeftPos,width, rightToLeft: false);
+//		List<Vector3> pathRight = MovementPaths.CreateSnakePath(originalRightPos,width, rightToLeft: true);
+//		left.GetComponent<Enemy>().StartMotion(pathLeft);
+//		right.GetComponent<Enemy>().StartMotion(pathRight);
+	}
 
-		List<Vector3> pathLeft = MovementPaths.CreateSnakePath(originalLeftPos,width, rightToLeft: false);
-		List<Vector3> pathRight = MovementPaths.CreateSnakePath(originalRightPos,width, rightToLeft: true);
-		left.GetComponent<Enemy>().StartMotion(pathLeft);
-		right.GetComponent<Enemy>().StartMotion(pathRight);
+	public void CreateWave(Wave wave) {
+		Sequence sequence = DOTween.Sequence();
+
+		foreach (EnemyType enemy in wave.enemies) {
+			EnemyType temp = enemy;
+
+			sequence.AppendCallback(()=> {
+
+				Debug.LogFormat("Create {0}",temp);
+				GameObject enemyObject = Instantiate(enemyBase) as GameObject;
+				enemyObject.transform.SetParent(transform);
+				enemyObject.transform.localPosition = leftEmitter.localPosition;
+				enemyObject.GetComponent<Enemy>().StartMotion(wave.path);
+			});
+			sequence.AppendInterval(wave.timeBetweenEmits);
+		}
 	}
 }

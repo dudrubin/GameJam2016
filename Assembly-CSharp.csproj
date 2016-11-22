@@ -54,6 +54,9 @@
      <Compile Include="Assets\Scripts\BaseCannonMovement.cs" />
      <Compile Include="Assets\Scripts\Data\CannonProperties.cs" />
      <Compile Include="Assets\Scripts\Data\Cannons.cs" />
+     <Compile Include="Assets\Scripts\Data\EnemyType.cs" />
+     <Compile Include="Assets\Scripts\Data\Wave.cs" />
+     <Compile Include="Assets\Scripts\Data\WaveGenerator.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\Movement\MovementPaths.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />

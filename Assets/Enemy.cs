@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void Kill(bool split = false) {
-		if (split) SplitEnemy();
+		if (false && split) SplitEnemy();
 		currentTween.Kill(false);
 		Destroy(gameObject);
 	}
