@@ -8,12 +8,14 @@ public class EmittersControl : MonoBehaviour {
 	Transform rightEmitter;
 	Transform timerBAr;
 	public static Object enemyBase;
+	public static Object shlomi;
 
 	void Awake() {
 		leftEmitter = transform.FindChild("EmitterLeft");
 		rightEmitter = transform.FindChild("EmitterRight");
 		timerBAr = transform.FindChild("TimerContainer");
 		enemyBase = Resources.Load("Prefabs/Enemy");
+		shlomi = Resources.Load("Prefabs/Shlomi");
 		NewWave();
 	}
 
@@ -59,7 +61,7 @@ public class EmittersControl : MonoBehaviour {
 			sequence.AppendCallback(()=> {
 
 				Debug.LogFormat("Create {0}",temp);
-				GameObject enemyObject = Instantiate(enemyBase) as GameObject;
+				GameObject enemyObject = Instantiate(shlomi) as GameObject;
 				enemyObject.transform.SetParent(transform);
 				enemyObject.transform.localPosition = leftEmitter.localPosition;
 				enemyObject.GetComponent<Enemy>().StartMotion(wave.path);

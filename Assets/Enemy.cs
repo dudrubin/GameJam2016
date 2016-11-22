@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	private float initEnergy = 0;
+	protected float initEnergy = 0;
 	private float health = 100;
 	private Vector3 direction = Vector3.zero;
 	private Transform healthBar;
@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
+	protected virtual void OnAwake(){
+		Debug.LogFormat("++++++++++");
+	}
 
 	void Awake() {
 
@@ -43,7 +46,7 @@ public class Enemy : MonoBehaviour {
 		if (targetPosition == Vector3.zero) {
 			targetPosition = GameObject.Find("EnemiesTarget").transform.localPosition;
 		}
-
+		OnAwake();
 	}
 
 	void Update() {
@@ -69,7 +72,7 @@ public class Enemy : MonoBehaviour {
 				10).SetEase(Ease.Linear).OnComplete(OnCompletedPath);
 	}
 
-	private void Kill(bool split = false) {
+	protected void Kill(bool split = false) {
 		if (false && split) SplitEnemy();
 		currentTween.Kill(false);
 		Destroy(gameObject);
@@ -127,7 +130,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public GameObject CreateSplitInstance() {
-		GameObject left = Instantiate(EmittersControl.enemyBase) as GameObject;
+		GameObject left = Instantiate(EmittersControl.shlomi) as GameObject;
 		left.transform.SetParent(transform.parent);
 		left.transform.localPosition = transform.localPosition;
 		return left;
