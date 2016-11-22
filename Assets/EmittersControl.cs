@@ -24,7 +24,7 @@ public class EmittersControl : MonoBehaviour {
 		Sequence sequence = DOTween.Sequence();
 		sequence.Append(timerBAr.DOScaleX(1, 0.05f));
 		sequence.AppendCallback(Emit);
-		sequence.Append(timerBAr.DOScaleX(0, waveDuration));
+		sequence.Append(timerBAr.DOScaleX(0, waveDuration).SetEase(Ease.Linear));
 		sequence.AppendCallback(NewWave);
 	}
 
@@ -40,7 +40,9 @@ public class EmittersControl : MonoBehaviour {
 		left.transform.localPosition = leftEmitter.localPosition;
 
 		float speed = 0.1f;
-		left.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
-		right.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
+//		left.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
+//		right.GetComponent<Enemy>().Create(MovementPaths.SNAKELIKE_MOVEMENT);
+		left.GetComponent<Enemy>().Create(false);
+		right.GetComponent<Enemy>().Create(true);
 	}
 }

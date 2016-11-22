@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -30,8 +31,12 @@ public class Enemy : MonoBehaviour {
 	///
 	/// </summary>
 	/// <param name="v"></param>
-	public void Create(Vector3[] path ) {
-		transform.DOPath (path , 5, PathType.CatmullRom, PathMode.TopDown2D, 10); 
+	public void Create(bool mirror) {
+		Vector3 originalPos = transform.localPosition;
+		int duration = 8;
+		List<Vector3> pathList = MovementPaths.CreateSnakePath(originalPos,rightToLeft: mirror);
+
+		transform.DOLocalPath(pathList.ToArray(), duration, PathType.CatmullRom, PathMode.TopDown2D, 10).SetEase(Ease.Linear);
 	}
 
 	void Update() {
