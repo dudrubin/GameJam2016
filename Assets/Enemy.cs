@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	static protected int TOTAL_ENEMIES= 0;
+	static protected int TOTAL_ENEMIES = 0;
+	static private List<GameObject> existingGameObjects = new List<GameObject>();
 	static public Action<int> OnEnemiesChange;
 
 	protected float initEnergy = 0;
@@ -33,19 +34,22 @@ public class Enemy : MonoBehaviour {
 
 	private bool RightToLeft {
 		get {
-			return currentX - lastX  < 0;
+			return currentX - lastX < 0;
 		}
 	}
 
-	protected virtual void OnAwake(){
-	}
-	protected virtual void OnHit(){
-	}
-	protected virtual void BeforeDestroyed(){
+	protected virtual void OnAwake() {
 	}
 
-	void OnDestroy(){
+	protected virtual void OnHit() {
+	}
+
+	protected virtual void BeforeDestroyed() {
+	}
+
+	void OnDestroy() {
 		TOTAL_ENEMIES--;
+		existingGameObjects.Remove(gameObject);
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
 		}
@@ -56,6 +60,7 @@ public class Enemy : MonoBehaviour {
 
 	void Awake() {
 		TOTAL_ENEMIES++;
+		existingGameObjects.Add(gameObject);
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
 		}
@@ -78,7 +83,7 @@ public class Enemy : MonoBehaviour {
 	///
 	/// </summary>
 	/// <param name="pathList"></param>
-	public void StartMotion(List<Vector3> pathList, float duration = 8,List<Vector3> generalPath = null) {
+	public void StartMotion(List<Vector3> pathList, float duration = 8, List<Vector3> generalPath = null) {
 		this.duration = duration;
 		if (generalPath != null) {
 			this.pathList = generalPath;
@@ -140,13 +145,13 @@ public class Enemy : MonoBehaviour {
 				rightToLeft: !RightToLeft);
 
 		float timeLeft = duration - GetPassedTimeSinceCreated();
-		left.GetComponent<Enemy>().StartMotion(leftPath, timeLeft,pathList);
-		right.GetComponent<Enemy>().StartMotion(rightPath, timeLeft,pathList);
+		left.GetComponent<Enemy>().StartMotion(leftPath, timeLeft, pathList);
+		right.GetComponent<Enemy>().StartMotion(rightPath, timeLeft, pathList);
 	}
 
 	public void OnCompletedPath() {
 		Debug.LogFormat("Complete");
-		StartMotion(pathList,duration);
+		StartMotion(pathList, duration);
 	}
 
 	public float GetPassedTimeSinceCreated() {
@@ -159,6 +164,12 @@ public class Enemy : MonoBehaviour {
 		left.transform.SetParent(transform.parent);
 		left.transform.localPosition = transform.localPosition;
 		return left;
+	}
+
+	public static void KillAll() {
+		foreach (GameObject existingGameObject in existingGameObjects) {
+			GameObject.Destroy(existingGameObject);
+		}
 	}
 
 
