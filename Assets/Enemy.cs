@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour {
 	static protected int TOTAL_ENEMIES = 0;
 	static private List<GameObject> existingGameObjects = new List<GameObject>();
 	static public Action<int> OnEnemiesChange;
+	static public Action<Enemy> OnEnemyKilled;
 
 	protected float initEnergy = 0;
 	private float health = 100;
@@ -36,6 +37,10 @@ public class Enemy : MonoBehaviour {
 		get {
 			return currentX - lastX < 0;
 		}
+	}
+
+	public int Reward{
+		get{ return (int)Mathf.Round (10 * (1 + TOTAL_ENEMIES / 5.0f)); }
 	}
 
 	protected virtual void OnAwake() {
@@ -100,6 +105,8 @@ public class Enemy : MonoBehaviour {
 	protected void Kill(bool split = false) {
 		if (false && split) SplitEnemy();
 		currentTween.Kill(false);
+
+		OnEnemyKilled (this);
 		Destroy(gameObject);
 	}
 

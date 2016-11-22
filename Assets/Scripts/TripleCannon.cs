@@ -10,9 +10,8 @@ public class TripleCannon : Cannon
 		Vector3 pivot = transform.FindChild ("Base/BarrelBase2").position;
 
 
-		cannonProperties = Cannons.BASIC_CANNON;
-		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform, barrel2Ref.transform, barrel3Ref.transform},pivot, cannonProperties);
-		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform, barrel2Ref.transform, barrel3Ref.transform }, cannonProperties);
+		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform, barrel2Ref.transform, barrel3Ref.transform},pivot, CannonProperties);
+		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform, barrel2Ref.transform, barrel3Ref.transform }, CannonProperties);
 	}
 
 	protected override void RespondToInput ()

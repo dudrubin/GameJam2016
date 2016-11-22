@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 public class Cannon : MonoBehaviour {
 
 	protected BaseCannonMovement movementHandler;
 	protected BaseCannonFire fireHandler;
-	protected CannonProperties cannonProperties;
+	public CannonProperties CannonProperties;
 
 	// Use this for initialization
 	void Start () {
@@ -14,16 +16,17 @@ public class Cannon : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		RespondToInput ();
+		if (!EventSystem.current.IsPointerOverGameObject())
+			RespondToInput ();
 	}
 
 	protected virtual void Init(){
 		GameObject barrelRef = (GameObject)transform.Find("Base/BarrelBase/Barrel").gameObject;
 		Vector3 pivot = transform.FindChild ("Base/BarrelBase").position;
+		transform.position = new Vector3 { x = 0.0f, y = -4.25f, z = 0.0f };
 
-		cannonProperties = Cannons.BASIC_CANNON;
-		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform},pivot, cannonProperties);
-		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform }, cannonProperties);
+		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform},pivot, CannonProperties);
+		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform }, CannonProperties);
 	}
 
 	protected virtual void RespondToInput(){
@@ -50,5 +53,13 @@ public class Cannon : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public virtual void InitiateStylishExit(){
+		transform.DOLocalMoveY (-6, 1);
+	}
+
+	public virtual void InitiateStylishEnterance(){
+		transform.DOLocalMoveY (0, 1);
 	}
 }

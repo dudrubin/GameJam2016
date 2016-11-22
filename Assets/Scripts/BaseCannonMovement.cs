@@ -19,7 +19,6 @@ public class BaseCannonMovement
 		if (touchPoints.Length > 0) {
 			Sequence firingSequence = DOTween.Sequence ();
 
-
 			foreach (Transform barrelTransform in this.barrelTransforms) {
 				float deltaX = barrelTransform.parent.position.x - touchPoints[0].x;
 				float deltaY = barrelTransform.parent.position.y - touchPoints[0].y;
@@ -40,10 +39,7 @@ public class BaseCannonMovement
 			foreach (Transform barrelTransform in this.barrelTransforms) {
 				firingSequence.Insert(cannonProperties.baseTurnSpeed + 0.04f + 0.03f, barrelTransform.DOLocalMoveY(originalY, 0.3f) );
 			}
-
-
 //			barrelTransforms[0].transform.localEulerAngles =;
-
 		}
 	}
 }
