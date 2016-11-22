@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour {
 		float deltaX = Time.deltaTime * velocity.x;
 		float deltaY = Time.deltaTime * velocity.y;
 		transform.position = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
-		Debug.LogFormat ("posx:{0} posy:{1}", transform.position.x, transform.position.y);
 		//Debug.Log(GetComponent<BoxCollider2D>().IsTouchingLayers());
 
 	}

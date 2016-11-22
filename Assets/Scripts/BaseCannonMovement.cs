@@ -6,7 +6,8 @@ public class BaseCannonMovement
 {
 	Transform[] barrelTransforms;
 	CannonProperties cannonProperties;
-	public BaseCannonMovement ( Transform[] barrelTransforms , CannonProperties properties )
+	Vector3 pivot;
+	public BaseCannonMovement ( Transform[] barrelTransforms , Vector3 pivot, CannonProperties properties )
 	{
 		this.barrelTransforms = barrelTransforms;
 		this.cannonProperties = properties;
@@ -14,14 +15,31 @@ public class BaseCannonMovement
 
 	public virtual void RespondToInput(Vector2[] touchPoints, Action doneCallback){
 		if (touchPoints.Length > 0) {
-			float deltaX = barrelTransforms[0].position.x - touchPoints[0].x;
-			float deltaY = barrelTransforms[0].position.y - touchPoints[0].y;
-			float barrelAngle = -(float)(Mathf.Atan (deltaX / deltaY) * 180.0 / 3.14);
-			this.barrelTransforms [0].DOLocalRotate (new Vector3 (){ x = 0, y = 0, z = barrelAngle }, 
-				cannonProperties.baseTurnSpeed).OnComplete(()=>{ 
-					if (doneCallback != null)
-						doneCallback ();
-				});;
+			Sequence firingSequence = DOTween.Sequence ();
+
+
+			foreach (Transform barrelTransform in this.barrelTransforms) {
+				float deltaX = barrelTransform.parent.position.x - touchPoints[0].x;
+				float deltaY = barrelTransform.parent.position.y - touchPoints[0].y;
+				float barrelAngle = -(float)(Mathf.Atan (deltaX / deltaY) * 180.0 / 3.14);
+				firingSequence.Insert (0, barrelTransform.parent.DOLocalRotate (new Vector3 (){ x = 0, y = 0, z = barrelAngle }, 
+					cannonProperties.baseTurnSpeed));
+			}
+			float originalY = barrelTransforms [0].localPosition.y;
+			foreach (Transform barrelTransform in this.barrelTransforms) {
+				firingSequence.Insert (cannonProperties.baseTurnSpeed, barrelTransform.DOLocalMoveY (originalY - 0.15f, 0.03f));
+			}
+				
+			firingSequence.InsertCallback (cannonProperties.baseTurnSpeed+ 0.04f, () => {
+				if (doneCallback != null)
+					doneCallback ();
+			});
+
+			foreach (Transform barrelTransform in this.barrelTransforms) {
+				firingSequence.Insert(cannonProperties.baseTurnSpeed + 0.04f + 0.03f, barrelTransform.DOLocalMoveY(originalY, 0.3f) );
+			}
+
+
 //			barrelTransforms[0].transform.localEulerAngles =;
 
 		}
