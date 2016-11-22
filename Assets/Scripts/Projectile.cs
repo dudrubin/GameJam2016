@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
 	Vector2 velocity;
-	public int Damage = 100;
 	private float lifeTime = 2;
-
+	private float damage;
 	// Use this for initialization
 	void Start() {
 		Invoke("Kill", lifeTime);
@@ -20,15 +19,20 @@ public class Projectile : MonoBehaviour {
 		float deltaX = Time.deltaTime * velocity.x;
 		float deltaY = Time.deltaTime * velocity.y;
 		transform.position = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
-		//Debug.LogFormat ("posx:{0} posy:{1}", transform.position.x, transform.position.y);
-		//Debug.LogFormat ("deltax:{0} deltay:{1}", deltaX, deltaY);
-		//transform.Translate (new Vector2 (deltaX, deltaY));
+		Debug.LogFormat ("posx:{0} posy:{1}", transform.position.x, transform.position.y);
 		//Debug.Log(GetComponent<BoxCollider2D>().IsTouchingLayers());
+
 	}
 
 	public void SetVelocity(Vector2 velocity) {
 		this.velocity = velocity;
 	}
+
+	public void SetDamage(float damage) {
+		this.damage = damage;
+	}
+
+
 
 	/// <summary>
 	///
@@ -40,7 +44,7 @@ public class Projectile : MonoBehaviour {
 		Enemy enemy = collision.gameObject.GetComponent<Enemy>();
 
 		if (enemy != null) {
-			enemy.Health -= Damage;
+			enemy.Health -= damage;
 		}
 
 		Kill();
