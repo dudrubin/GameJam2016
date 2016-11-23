@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\TripleCannon.cs" />
      <Compile Include="Assets\Splatter.cs" />
      <Compile Include="Assets\Wiggle.cs" />
+     <Compile Include="Assets\WindSheild.cs" />
      <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
      <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />

@@ -19,8 +19,8 @@ namespace Enemies {
 				wallPrefab= Resources.Load("Prefabs/Wall");
 			}
 
-			images = transform.FindChild("Image").gameObject;
-			hurtImages = transform.FindChild("Image/Hurt").gameObject;
+			images = transform.FindChild("RotationPivot/Image").gameObject;
+			hurtImages = transform.FindChild("RotationPivot/Image/Hurt").gameObject;
 			float nextDuration = Random.Range(MIN_SPIT_DURATION,MAX_SPIT_DURATION);
 			Debug.LogFormat("nextDuration {0}", nextDuration);
 			wallSpitCounter = DOVirtual.DelayedCall(nextDuration,SpitWall);
