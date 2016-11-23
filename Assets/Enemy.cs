@@ -68,6 +68,9 @@ public class Enemy : MonoBehaviour {
 			s.transform.SetParent(transform.parent);
 			s.transform.localPosition = transform.localPosition;
 		}
+		else {
+			Sounds.Play("monster");
+		}
 
 
 		existingGameObjects.Remove(gameObject);

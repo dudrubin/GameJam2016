@@ -8,7 +8,6 @@ public class Sounds : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		foreach (AudioSource source in GetComponents<AudioSource>()) {
-			Debug.Log("========="+source.clip.name);
 			sources.Add(source.clip.name,source);
 		}
 	}
