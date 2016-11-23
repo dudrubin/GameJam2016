@@ -46,8 +46,8 @@ public class Cannon : MonoBehaviour {
 	protected bool getTouchPos(out Vector2 touchPos){
 		touchPos = new Vector2();
 		for (var i = 0; i < Input.touchCount; ++i) {
-			if (Input.GetTouch (i).phase == TouchPhase.Ended) {
-				touchPos = Input.GetTouch (i).position;
+			if (Input.GetTouch (i).phase == TouchPhase.Began) {
+				touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch (i).position);
 				Debug.LogFormat ("touch detected {0},{1}", touchPos.x, touchPos.y);
 				return true;
 			}
