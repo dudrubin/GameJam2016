@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Movement\MovementPaths.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\TripleCannon.cs" />
+     <Compile Include="Assets\Sounds.cs" />
      <Compile Include="Assets\Splatter.cs" />
      <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample05.cs" />
      <Compile Include="Assets\SpriteMask\Examples\Scripts\SpriteMaskExample06.cs" />

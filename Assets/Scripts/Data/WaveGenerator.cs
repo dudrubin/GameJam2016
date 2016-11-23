@@ -13,7 +13,7 @@ namespace Data {
 			Wave newWave = waves[waveNumber];
 			newWave.path = MovementPaths.CreateSnakePath(emitterPosition, width, rightToLeft: rtl);
 			waveNumber++;
-			waveNumber = Math.Min(waveNumber, waves.Count);
+			waveNumber = Math.Min(waveNumber, waves.Count-1);
 			return newWave;
 		}
 
