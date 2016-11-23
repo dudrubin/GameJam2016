@@ -114,6 +114,9 @@
  <Reference Include="DOTweenProEditor">
  <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Demigiant/DOTweenPro/Editor/DOTweenProEditor.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditorConsuloPlugin5.3">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Editor/Plugins/UnityEditorConsuloPlugin5.3.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -125,9 +128,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditorConsuloPlugin5.3">
- <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Editor/Plugins/UnityEditorConsuloPlugin5.3.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

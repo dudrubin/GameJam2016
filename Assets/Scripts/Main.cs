@@ -82,14 +82,14 @@ public class Main : MonoBehaviour {
 			cannonObj.GetComponent<Cannon>().SetCannonProperties(newCannonProperties);
 		}
 
-		switch (newCannonProperties.cannonPrefab) {
-			case "BasicCannon":
+		switch (newCannonProperties.cannonType) {
+			case 1:
 				upgradeButton.GetComponent<Image>().sprite = cannonSprites[0];
 			break;
-			case "DoubleBarrelCannon":
+			case 2:
 				upgradeButton.GetComponent<Image>().sprite = cannonSprites[1];
 			break;
-			case "TripleBarrelCannon":
+			case 3:
 				upgradeButton.GetComponent<Image>().sprite = cannonSprites[2];
 			break;
 		}
