@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data;
 using DG.Tweening;
-using UnityEditor;
 using UnityEngine;
 
 public class EmittersControl : MonoBehaviour {
