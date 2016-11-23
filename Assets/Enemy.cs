@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour {
 	float currentX = 0;
 	Sequence healthSequence;
 
+	public bool ExplodeAtDeath = true;
+
 	public float Health {
 		set {
 			float old = health;
@@ -60,9 +62,13 @@ public class Enemy : MonoBehaviour {
 		BeforeDestroyed();
 		TOTAL_ENEMIES--;
 
-		GameObject s = Instantiate(xplosion) as GameObject;
-		s.transform.SetParent(transform.parent);
-		s.transform.localPosition = transform.localPosition;
+		if (ExplodeAtDeath) {
+
+			GameObject s = Instantiate(xplosion) as GameObject;
+			s.transform.SetParent(transform.parent);
+			s.transform.localPosition = transform.localPosition;
+		}
+
 
 		existingGameObjects.Remove(gameObject);
 		if (OnEnemiesChange != null) {
@@ -197,9 +203,17 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public static void KillAll() {
-		foreach (GameObject existingGameObject in existingGameObjects) {
-			GameObject.Destroy(existingGameObject);
+
+		Sequence s = DOTween.Sequence();
+		for (int i = 0; i < existingGameObjects.Count; i++) {
+			GameObject existingGameObject = existingGameObjects[i];
+			existingGameObject.GetComponent<Enemy>().ExplodeAtDeath = false;
+			s.AppendCallback(()=>GameObject.Destroy(existingGameObject));
+			s.AppendInterval(0.002f);
 		}
+
+		s.AppendCallback(existingGameObjects.Clear);
+
 	}
 
 

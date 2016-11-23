@@ -125,6 +125,9 @@
  <Reference Include="UnityEditorConsuloPlugin5.3">
  <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/Editor/Plugins/UnityEditorConsuloPlugin5.3.dll</HintPath>
  </Reference>
+ <Reference Include="JMOAssets">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -136,9 +139,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="JMOAssets">
- <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

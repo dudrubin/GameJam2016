@@ -152,6 +152,7 @@ public class Main : MonoBehaviour {
 		canvasGroup.DOFade(1, 0.5f);
 		Debug.LogFormat("GameOver");
 		emittersControl.StopEmitting();
+		Enemy.KillAll();
 	}
 
 	public void StartGame() {

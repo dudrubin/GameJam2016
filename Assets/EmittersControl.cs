@@ -44,7 +44,6 @@ public class EmittersControl : MonoBehaviour {
 		if (waveSequence!= null) {
 			waveSequence.Kill(false);
 		}
-		Enemy.KillAll();
 	}
 
 	/// <summary>
