@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour {
 	Tween currentTween;
 	float lastX = 0;
 	float currentX = 0;
+	Sequence healthSequence;
 
 	public float Health {
 		set {
@@ -39,8 +40,10 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	public int Reward{
-		get{ return (int)Mathf.Round (10 * (1 + TOTAL_ENEMIES / 5.0f)); }
+	public int Reward {
+		get {
+			return (int)Mathf.Round(10 * (1 + TOTAL_ENEMIES / 5.0f));
+		}
 	}
 
 	protected virtual void OnAwake() {
@@ -59,6 +62,9 @@ public class Enemy : MonoBehaviour {
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
 		}
+		if (healthSequence != null) {
+			healthSequence.Kill(false);
+		}
 	}
 
 
@@ -66,6 +72,7 @@ public class Enemy : MonoBehaviour {
 
 		initHealth = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");
+		healthBar.GetComponent<CanvasGroup>().alpha = 0;
 
 		if (targetPosition == Vector3.zero) {
 			targetPosition = GameObject.Find("EnemiesTarget").transform.localPosition;
@@ -105,7 +112,7 @@ public class Enemy : MonoBehaviour {
 		if (false && split) SplitEnemy();
 		currentTween.Kill(false);
 
-		OnEnemyKilled (this);
+		OnEnemyKilled(this);
 		Destroy(gameObject);
 	}
 
@@ -126,9 +133,16 @@ public class Enemy : MonoBehaviour {
 
 		if (oldEnergy > 0) {
 			newEnergy = Mathf.Max(0, newEnergy);
-			healthBar.DOScaleX(newEnergy / initHealth, 0.2f).OnComplete(() => {
+			healthSequence.Kill(false);
+			healthSequence = DOTween.Sequence();
+			CanvasGroup canvasGroup = healthBar.GetComponent<CanvasGroup>();
+			canvasGroup.alpha = 1;
+			healthSequence.Append(healthBar.DOScaleX(newEnergy / initHealth, 0.2f));
+			healthSequence.AppendCallback(() => {
 				if (newEnergy <= 0) Kill(true);
 			});
+			healthSequence.AppendInterval(0.5f);
+			healthSequence.Append(canvasGroup.DOFade(0, 0.1f));
 		}
 	}
 
