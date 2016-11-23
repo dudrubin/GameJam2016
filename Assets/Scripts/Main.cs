@@ -159,7 +159,6 @@ public class Main : MonoBehaviour {
 		this.cannonLevel = 1;
 		this.money = 0;
 		glass.Damage = 0;
-
 		timeStarted = DateTime.Now;
 		glass.ResetGlass();
 		startScreen.SetActive(false);
@@ -195,6 +194,9 @@ public class Main : MonoBehaviour {
 
 	public void OnReStartGameClicked() {
 		CanvasGroup canvasGroup = endScreen.GetComponent<CanvasGroup>();
-		canvasGroup.DOFade(0, 0.5f).OnComplete(StartGame);
+		canvasGroup.DOFade(0, 0.5f).OnComplete(()=>{
+			StartGame();
+			InitCannon();
+		});
 	}
 }
