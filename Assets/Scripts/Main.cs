@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -7,12 +7,13 @@ public class Main : MonoBehaviour {
 
 	const string SCORE_KEY = "BestScore";
 	const int MAX_CREATURES = 13;
-	int money = 10000;
+	int money = 300;
 	int cannonLevel = 1;
-	public Button upgradeButton;
-	public Text moneyLabel;
-	public Text upgradeCost;
-	public Text cannonLevelLabel;
+	public List<Sprite> cannonSprites;
+	Button upgradeButton;
+	Text moneyLabel;
+	Text upgradeCost;
+	Text cannonLevelLabel;
 	Transform creaturesCount;
 	EmittersControl emittersControl;
 	GameObject cannonObj;
@@ -23,6 +24,7 @@ public class Main : MonoBehaviour {
 	Button startButton;
 	Button restartButton;
 	DateTime timeStarted;
+
 
 	Text textYourTime;
 	Text textBestTime;
@@ -58,8 +60,10 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		moneyLabel.text = string.Format("${0}", this.money.ToString());
-		if (cannonLevel < Cannons.cannonList.Length - 1)
-			upgradeCost.text = string.Format("UPGRADE COST:${0}", this.nextUpgradeCost());
+		if (cannonLevel < Cannons.cannonList.Length - 1) {
+			upgradeCost.text = string.Format("{0}", this.nextUpgradeCost());
+			upgradeButton.interactable = money > nextUpgradeCost();
+		}
 		else {
 			upgradeCost.text = "MAXED!";
 			upgradeButton.interactable = false;
@@ -77,6 +81,19 @@ public class Main : MonoBehaviour {
 		} else {
 			cannonObj.GetComponent<Cannon>().SetCannonProperties(newCannonProperties);
 		}
+
+		switch (newCannonProperties.cannonPrefab) {
+			case "BasicCannon":
+				upgradeButton.GetComponent<Image>().sprite = cannonSprites[0];
+			break;
+			case "DoubleBarrelCannon":
+				upgradeButton.GetComponent<Image>().sprite = cannonSprites[1];
+			break;
+			case "TripleBarrelCannon":
+				upgradeButton.GetComponent<Image>().sprite = cannonSprites[2];
+			break;
+		}
+
 	}
 
 	void InitCannon() {
