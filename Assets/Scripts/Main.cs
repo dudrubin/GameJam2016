@@ -37,7 +37,7 @@ public class Main : MonoBehaviour {
 		startButton.onClick.AddListener(OnStartGameClicked);
 		restartButton.onClick.AddListener(OnReStartGameClicked);
 		endScreen.SetActive(false);
-		//upgradeButton.onClick.AddListener(UpgradeWeapon);
+		upgradeButton.onClick.AddListener(UpgradeWeapon);
 		InitCannon();
 	}
 
