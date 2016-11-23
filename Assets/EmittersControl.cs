@@ -66,7 +66,9 @@ public class EmittersControl : MonoBehaviour {
 	///
 	/// </summary>
 	private void Emit() {
-		CreateWave(WaveGenerator.GenerateWave(leftEmitter.localPosition,true));
+		bool right = Random.Range(0,100) >50;
+		Vector3 position = right? rightEmitter.localPosition:leftEmitter.localPosition;
+		CreateWave(WaveGenerator.GenerateWave(position,right));
 	}
 
 	public void CreateWave(Wave wave) {
