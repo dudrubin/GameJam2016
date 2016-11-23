@@ -212,9 +212,8 @@ public class Enemy : MonoBehaviour {
 			GameObject existingGameObject = existingGameObjects[i];
 			existingGameObject.GetComponent<Enemy>().ExplodeAtDeath = false;
 			s.AppendCallback(()=>GameObject.Destroy(existingGameObject));
-			s.AppendInterval(0.002f);
+			s.AppendInterval(0.001f);
 		}
-
 		s.AppendCallback(existingGameObjects.Clear);
 
 	}

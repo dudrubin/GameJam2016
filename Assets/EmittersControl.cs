@@ -66,6 +66,7 @@ public class EmittersControl : MonoBehaviour {
 	}
 
 	public void CreateWave(Wave wave) {
+
 		waveSequence.Kill(false);
 
 		waveSequence = DOTween.Sequence();

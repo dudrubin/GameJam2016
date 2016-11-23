@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +49,6 @@ public class Main : MonoBehaviour {
 		moneyLabel = GameObject.Find("Money").GetComponent<Text>();
 		cannonLevelLabel = GameObject.Find("CannonLevel").GetComponent<Text>();
 		upgradeCost = GameObject.Find("UpgradeCost").GetComponent<Text>();
-		Enemy.OnEnemiesChange += OnEnemiesChange;
 		Enemy.OnEnemyKilled += OnEnemyKilled;
 		startButton.onClick.AddListener(OnStartGameClicked);
 		restartButton.onClick.AddListener(OnReStartGameClicked);
@@ -133,6 +133,7 @@ public class Main : MonoBehaviour {
 	}
 
 	public void OnGameOver() {
+		Enemy.OnEnemiesChange -= OnEnemiesChange;
 		TimeSpan yourTime = DateTime.Now.Subtract(timeStarted);
 		textYourTime.text =  string.Format("{0:D2}:{1:D2}",yourTime.Minutes,yourTime.Seconds);
 
@@ -151,11 +152,14 @@ public class Main : MonoBehaviour {
 		canvasGroup.alpha = 0;
 		canvasGroup.DOFade(1, 0.5f);
 		Debug.LogFormat("GameOver");
-		emittersControl.StopEmitting();
 		Enemy.KillAll();
+		emittersControl.StopEmitting();
 	}
 
 	public void StartGame() {
+
+		Enemy.OnEnemiesChange += OnEnemiesChange;
+		WaveGenerator.Init();
 		timeStarted = DateTime.Now;
 		glass.ResetGlass();
 		startScreen.SetActive(false);

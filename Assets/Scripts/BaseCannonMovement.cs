@@ -22,8 +22,8 @@ public class BaseCannonMovement
 	public virtual void RespondToInput(Vector2[] touchPoints, Action doneCallback){
 		if (moving) 
 			return;
-		float fastPhaseDuration = 0.002f;
-		float slowPhaseDuration = 0.02f;
+		float fastPhaseDuration = 0.01f;
+		float slowPhaseDuration = 0.08f;
 
 		moving = true;
 
