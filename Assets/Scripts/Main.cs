@@ -18,19 +18,23 @@ public class Main : MonoBehaviour {
 	Queue<int> breakSteps;
 	WindSheild glass;
 
+	GameObject startScreen;
+	Button startButton;
+
 
 	// Use this for initialization
 	void Awake() {
 		CreateBreakSteps();
 		glass = GameObject.Find("Windshield").GetComponent<WindSheild>();
+		startScreen  = GameObject.Find("StartScreen");
+		startButton = GameObject.Find("StartButton").GetComponent<Button>();
 		emittersControl = GameObject.Find("Emitters").GetComponent<EmittersControl>();
 		creaturesCount = transform.FindChild("HUD/CreaturesCount");
 		Enemy.OnEnemiesChange += OnEnemiesChange;
 		Enemy.OnEnemyKilled += OnEnemyKilled;
-		DOVirtual.DelayedCall(1, StartGame);
-		upgradeButton.onClick.AddListener(UpgradeWeapon);
+		startButton.onClick.AddListener(OnStartGameClicked);
+		//upgradeButton.onClick.AddListener(UpgradeWeapon);
 		InitCannon();
-
 	}
 
 	// Update is called once per frame
@@ -98,6 +102,7 @@ public class Main : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		startScreen.SetActive(false);
 		emittersControl.StartEmitting();
 	}
 
@@ -118,5 +123,10 @@ public class Main : MonoBehaviour {
 		breakSteps.Enqueue(6);
 		breakSteps.Enqueue(9);
 		breakSteps.Enqueue(12);
+	}
+
+	public void OnStartGameClicked() {
+		CanvasGroup canvasGroup =  startScreen.GetComponent<CanvasGroup>();
+		canvasGroup.DOFade(0,0.5f).OnComplete(StartGame);
 	}
 }
