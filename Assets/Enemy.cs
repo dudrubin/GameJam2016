@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
 	static public Action<int> OnEnemiesChange;
 	static public Action<Enemy> OnEnemyKilled;
 
-	protected float initEnergy = 0;
+	protected float initHealth = 0;
 	private float health = 100;
 	private Vector3 direction = Vector3.zero;
 	private Transform healthBar;
@@ -53,30 +53,29 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void OnDestroy() {
+		BeforeDestroyed();
 		TOTAL_ENEMIES--;
 		existingGameObjects.Remove(gameObject);
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
 		}
-
-		BeforeDestroyed();
 	}
 
 
 	void Awake() {
-		TOTAL_ENEMIES++;
-		existingGameObjects.Add(gameObject);
-		if (OnEnemiesChange != null) {
-			OnEnemiesChange(TOTAL_ENEMIES);
-		}
 
-		initEnergy = Health;
+		initHealth = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");
 
 		if (targetPosition == Vector3.zero) {
 			targetPosition = GameObject.Find("EnemiesTarget").transform.localPosition;
 		}
 		OnAwake();
+		TOTAL_ENEMIES++;
+		existingGameObjects.Add(gameObject);
+		if (OnEnemiesChange != null) {
+			OnEnemiesChange(TOTAL_ENEMIES);
+		}
 	}
 
 	void Update() {
@@ -127,7 +126,7 @@ public class Enemy : MonoBehaviour {
 
 		if (oldEnergy > 0) {
 			newEnergy = Mathf.Max(0, newEnergy);
-			healthBar.DOScaleX(newEnergy / initEnergy, 0.2f).OnComplete(() => {
+			healthBar.DOScaleX(newEnergy / initHealth, 0.2f).OnComplete(() => {
 				if (newEnergy <= 0) Kill(true);
 			});
 		}

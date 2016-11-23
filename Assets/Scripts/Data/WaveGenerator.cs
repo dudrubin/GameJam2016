@@ -8,7 +8,7 @@ namespace Data {
 
 		public static Wave GenerateWave(Vector3 emitterPosition,bool rtl = false) {
 			Wave newWave = new Wave();
-			newWave.enemies = new List<EnemyType>() { EnemyType.Nezach,EnemyType.Nezach,EnemyType.Nezach};
+			newWave.enemies = new List<EnemyType>() { EnemyType.Ronel,EnemyType.Ronel,EnemyType.Ronel};
 			newWave.path =  MovementPaths.CreateSnakePath(emitterPosition,width, rightToLeft: false);
 			return newWave;
 		}

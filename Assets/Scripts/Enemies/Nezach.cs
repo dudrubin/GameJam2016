@@ -31,8 +31,6 @@ namespace Enemies {
 			s.transform.SetParent(transform.parent);
 			s.transform.localPosition = transform.localPosition;
 			s.transform.eulerAngles = new Vector3(0,0,Random.Range(0,360));
-
-			base.OnHit();
 		}
 
 		protected override void OnHit() {

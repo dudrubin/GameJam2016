@@ -77,7 +77,7 @@ namespace Enemies {
 				gameObject.SetActive(i == level);
 			}
 
-			initEnergy = healthCount[level];
+			initHealth = healthCount[level];
 			Health = healthCount[level];
 		}
 
