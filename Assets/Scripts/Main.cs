@@ -62,26 +62,26 @@ public class Main : MonoBehaviour {
 		money -= nextUpgradeCost();
 		cannonLevel++;
 		CannonProperties newCannonProperties = Cannons.getCannonProperties(cannonLevel);
-		if (cannonObj.GetComponent<Cannon>().CannonProperties.cannonPrefab != newCannonProperties.cannonPrefab) {
+		if (cannonObj.GetComponent<Cannon>().GetCannonProperties().cannonType != newCannonProperties.cannonType) {
 			InitCannon();
 		} else {
-			cannonObj.GetComponent<Cannon>().CannonProperties = newCannonProperties;
+			cannonObj.GetComponent<Cannon>().SetCannonProperties(newCannonProperties);
 		}
 	}
 
 	void InitCannon() {
 		CannonProperties cannonProperties = Cannons.getCannonProperties(cannonLevel);
 		if (cannonObj != null) {
-			GameObject newcannonObj = (GameObject)GameObject.Instantiate(Resources.Load(string.Format("Prefabs/{0}", cannonProperties.cannonPrefab)));
+			GameObject newcannonObj = (GameObject)GameObject.Instantiate(Resources.Load(string.Format("Prefabs/{0}", Cannons.getPrefabName(cannonProperties.cannonType))));
 
-			newcannonObj.GetComponent<Cannon>().CannonProperties = cannonProperties;
+			newcannonObj.GetComponent<Cannon>().SetCannonProperties(cannonProperties);
 
 			initiateStylishCannonSwitch(cannonObj.GetComponent<Cannon>().transform, newcannonObj.transform);
 			cannonObj.GetComponent<Cannon>().Kill ();
 			cannonObj = newcannonObj;
 		} else {
-			cannonObj = (GameObject)GameObject.Instantiate(Resources.Load(string.Format("Prefabs/{0}", cannonProperties.cannonPrefab)));
-			cannonObj.GetComponent<Cannon>().CannonProperties = cannonProperties;
+			cannonObj = (GameObject)GameObject.Instantiate(Resources.Load(string.Format("Prefabs/{0}", Cannons.getPrefabName(cannonProperties.cannonType))));
+			cannonObj.GetComponent<Cannon>().SetCannonProperties(cannonProperties);
 		}
 	}
 

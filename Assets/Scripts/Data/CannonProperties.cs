@@ -6,7 +6,8 @@ public class CannonProperties
 	public float baseDamage;
 	public float baseProjectileSpeed;
 	public float  baseTurnSpeed;
-	public string cannonPrefab;
+	public int cannonType;
+	public int projectileType;
 	public int cost;
 }
 

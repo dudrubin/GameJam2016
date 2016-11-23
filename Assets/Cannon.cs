@@ -7,7 +7,8 @@ public class Cannon : MonoBehaviour {
 
 	protected BaseCannonMovement movementHandler;
 	protected BaseCannonFire fireHandler;
-	public CannonProperties CannonProperties;
+	protected CannonProperties cannonProperties;
+
 	private float lifetime = 1.0f;
 	// Use this for initialization
 	void Start () {
@@ -29,8 +30,8 @@ public class Cannon : MonoBehaviour {
 		Vector3 pivot = transform.FindChild ("Base/BarrelBase").position;
 		transform.position = new Vector3 { x = 0.0f, y = -4.25f, z = 0.0f };
 
-		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform},pivot, CannonProperties);
-		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform }, CannonProperties);
+		movementHandler = new BaseCannonMovement (new Transform[] { barrelRef.transform},pivot, this.GetCannonProperties());
+		fireHandler = new BaseCannonFire (new Transform[] { barrelRef.transform }, this.GetCannonProperties());
 	}
 
 	protected virtual void RespondToInput(){
@@ -65,5 +66,17 @@ public class Cannon : MonoBehaviour {
 
 	public virtual void InitiateStylishEnterance(){
 		transform.DOLocalMoveY (0, 1);
+	}
+
+	public void  SetCannonProperties(CannonProperties p){
+		this.cannonProperties = p;
+		if (this.fireHandler != null)
+			this.fireHandler.CannonProperties = p;
+		if (this.movementHandler != null)
+			this.movementHandler.CannonProperties = p;
+	}
+
+	public CannonProperties GetCannonProperties(){
+		return this.cannonProperties;
 	}
 }
