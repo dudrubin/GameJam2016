@@ -8,7 +8,7 @@ public class Cannon : MonoBehaviour {
 	protected BaseCannonMovement movementHandler;
 	protected BaseCannonFire fireHandler;
 	public CannonProperties CannonProperties;
-
+	private float lifetime = 1.0f;
 	// Use this for initialization
 	void Start () {
 		Init ();
@@ -18,6 +18,10 @@ public class Cannon : MonoBehaviour {
 	void Update () {
 		if (!EventSystem.current.IsPointerOverGameObject())
 			RespondToInput ();
+	}
+
+	public void Kill(){
+		Destroy (this.gameObject, lifetime);
 	}
 
 	protected virtual void Init(){

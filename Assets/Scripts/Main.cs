@@ -37,7 +37,7 @@ public class Main : MonoBehaviour {
 		startButton.onClick.AddListener(OnStartGameClicked);
 		restartButton.onClick.AddListener(OnReStartGameClicked);
 		endScreen.SetActive(false);
-		//upgradeButton.onClick.AddListener(UpgradeWeapon);
+		upgradeButton.onClick.AddListener(UpgradeWeapon);
 		InitCannon();
 	}
 
@@ -73,6 +73,7 @@ public class Main : MonoBehaviour {
 			newcannonObj.GetComponent<Cannon>().CannonProperties = cannonProperties;
 
 			initiateStylishCannonSwitch(cannonObj.GetComponent<Cannon>().transform, newcannonObj.transform);
+			cannonObj.GetComponent<Cannon>().Kill ();
 			cannonObj = newcannonObj;
 		} else {
 			cannonObj = (GameObject)GameObject.Instantiate(Resources.Load(string.Format("Prefabs/{0}", cannonProperties.cannonPrefab)));
@@ -122,10 +123,13 @@ public class Main : MonoBehaviour {
 
 	private void initiateStylishCannonSwitch(Transform oldCannon, Transform newCannon) {
 		newCannon.position = new Vector3(0.0f, -8.0f, 0.0f);
-		oldCannon.DOLocalMoveY(-8.5f, 0.5f).OnComplete(() => {
-			newCannon.DOLocalMoveY(-4.25f, 0.5f);
+		oldCannon.DOLocalMoveY (-8.5f, 0.5f).OnComplete (() => {
+			newCannon.DOLocalMoveY (-4.25f, 0.5f);
 		});
+
 	}
+
+
 
 	public void CreateBreakSteps() {
 		breakSteps = new Queue<int>();
