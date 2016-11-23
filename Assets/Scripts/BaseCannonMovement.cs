@@ -43,7 +43,7 @@ public class BaseCannonMovement
 			}
 
 			foreach (Transform barrelTransform in this.barrelTransforms) {
-				firingSequence.Insert (turnDuration, barrelTransform.DOLocalMoveY (originalY - 0.15f, fastPhaseDuration));
+				firingSequence.Insert (turnDuration, barrelTransform.DOLocalMoveY (originalY - 0.25f, fastPhaseDuration));
 			}
 				
 			firingSequence.InsertCallback (turnDuration + fastPhaseDuration/2, () => {
