@@ -47,6 +47,8 @@ public class Main : MonoBehaviour {
 		creaturesCount = transform.FindChild("HUD/CreaturesCount");
 		upgradeButton = GameObject.Find("UpgradeButton").GetComponent<Button>();
 		moneyLabel = GameObject.Find("Money").GetComponent<Text>();
+		upgradeCost = GameObject.Find("UpgradeCost").GetComponent<Text>();
+
 
 		Enemy.OnEnemyKilled += OnEnemyKilled;
 		startButton.onClick.AddListener(OnStartGameClicked);
@@ -61,8 +63,11 @@ public class Main : MonoBehaviour {
 		moneyLabel.text = string.Format("${0}", this.money.ToString());
 		if (cannonLevel < Cannons.cannonList.Length - 1) {
 			upgradeButton.interactable = money > nextUpgradeCost();
+			upgradeCost.text = string.Format("{0}", this.nextUpgradeCost());
+
 		}
 		else {
+			upgradeCost.text = "MAXED!";
 			upgradeButton.interactable = false;
 		}
 
@@ -196,7 +201,6 @@ public class Main : MonoBehaviour {
 		CanvasGroup canvasGroup = endScreen.GetComponent<CanvasGroup>();
 		canvasGroup.DOFade(0, 0.5f).OnComplete(()=>{
 			StartGame();
-			InitCannon();
-		});
+			InitCannon();});
 	}
 }
