@@ -50,6 +50,7 @@
      <Compile Include="Assets\EmittersControl.cs" />
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\GameBorders.cs" />
+     <Compile Include="Assets\RotateToPath.cs" />
      <Compile Include="Assets\Scripts\BaseCannonFire.cs" />
      <Compile Include="Assets\Scripts\BaseCannonMovement.cs" />
      <Compile Include="Assets\Scripts\Data\CannonProperties.cs" />
