@@ -49,4 +49,19 @@ public class Projectile : MonoBehaviour {
 		Kill();
 	}
 
+	public static string getPrefabName(int projectileType){
+		switch (projectileType) {
+		case 1:
+			return "Projectile1";
+			break;
+		case 2:
+			return "Projectile2";
+			break;
+		case 3:
+			return "Projectile3";
+			break;
+		}
+		return null;
+	}
+
 }
