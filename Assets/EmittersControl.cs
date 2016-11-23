@@ -13,6 +13,7 @@ public class EmittersControl : MonoBehaviour {
 	public static Object nezach;
 	public static Object ronel;
 	Sequence waveSequence;
+	Sequence mainSequence;
 	SpriteMask mask;
 
 	Dictionary<EnemyType,Object> prefabMap ;
@@ -44,6 +45,9 @@ public class EmittersControl : MonoBehaviour {
 		if (waveSequence!= null) {
 			waveSequence.Kill(false);
 		}
+		if (mainSequence!= null) {
+			mainSequence.Kill(false);
+		}
 	}
 
 	/// <summary>
@@ -51,11 +55,11 @@ public class EmittersControl : MonoBehaviour {
 	/// </summary>
 	public void NewWave() {
 		float waveDuration = 10;
-		Sequence sequence = DOTween.Sequence();
-		sequence.Append(timerBAr.DOScaleX(1, 0.05f));
-		sequence.AppendCallback(Emit);
-		sequence.Append(timerBAr.DOScaleX(0, waveDuration).SetEase(Ease.Linear));
-		sequence.AppendCallback(NewWave);
+		mainSequence = DOTween.Sequence();
+		mainSequence.Append(timerBAr.DOScaleX(1, 0.05f));
+		mainSequence.AppendCallback(Emit);
+		mainSequence.Append(timerBAr.DOScaleX(0, waveDuration).SetEase(Ease.Linear));
+		mainSequence.AppendCallback(NewWave);
 	}
 
 	/// <summary>
