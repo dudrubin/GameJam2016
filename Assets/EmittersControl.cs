@@ -14,6 +14,7 @@ public class EmittersControl : MonoBehaviour {
 	public static Object nezach;
 	public static Object ronel;
 	Sequence waveSequence;
+	SpriteMask mask;
 
 	Dictionary<EnemyType,Object> prefabMap ;
 
@@ -21,6 +22,7 @@ public class EmittersControl : MonoBehaviour {
 		leftEmitter = transform.FindChild("EmitterLeft");
 		rightEmitter = transform.FindChild("EmitterRight");
 		timerBAr = transform.FindChild("TimerContainer");
+		mask = GetComponent<SpriteMask>();
 
 		//enemies
 		enemyBase = Resources.Load("Prefabs/Enemy");
@@ -72,7 +74,7 @@ public class EmittersControl : MonoBehaviour {
 
 		foreach (EnemyType enemy in wave.enemies) {
 			EnemyType temp = enemy;
-
+			//mask.forceDefaultMaterialOnChilds = true;
 			waveSequence.AppendCallback(()=> {
 
 				Debug.LogFormat("Create {0}",temp);
@@ -80,6 +82,10 @@ public class EmittersControl : MonoBehaviour {
 				enemyObject.transform.SetParent(transform);
 				enemyObject.transform.localPosition = leftEmitter.localPosition;
 				enemyObject.GetComponent<Enemy>().StartMotion(wave.path);
+//				mask.update();
+				foreach (SpriteRenderer renderer in enemyObject.GetComponentsInChildren<SpriteRenderer>()) {
+					mask.updateSprites(renderer.transform);
+				}
 			});
 			waveSequence.AppendInterval(wave.timeBetweenEmits);
 		}
