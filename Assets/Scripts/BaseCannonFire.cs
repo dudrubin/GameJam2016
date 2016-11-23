@@ -23,10 +23,12 @@ public class BaseCannonFire
 				Vector3 angle = barrelTransform.parent.localEulerAngles;
 				string projectilePrefabName = Projectile.getPrefabName (this.CannonProperties.projectileType);
 				GameObject ProjectileObj = GameObject.Instantiate (Resources.Load (string.Format("Prefabs/{0}",projectilePrefabName))) as GameObject;
+
+				Vector3 nozzlePos = barrelTransform.FindChild ("Nozzle").position;
 				Projectile projectile = ProjectileObj.GetComponent<Projectile> ();
-				Debug.LogFormat("2 barrelTransform.x = {0}" ,barrelTransform.position.x);
-				ProjectileObj.transform.position = barrelTransform.position;
+				ProjectileObj.transform.position = nozzlePos;
 				ProjectileObj.transform.localEulerAngles = angle;
+
 				Vector2 velocity = new Vector2 (-CannonProperties.baseProjectileSpeed * Mathf.Sin (angle.z * Mathf.Deg2Rad), CannonProperties.baseProjectileSpeed * Mathf.Cos (angle.z * Mathf.Deg2Rad));
 				projectile.SetVelocity (velocity);
 				projectile.SetDamage (CannonProperties.baseDamage);
