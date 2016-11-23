@@ -34,7 +34,6 @@ namespace Enemies {
 				hitTween.Kill(false);
 			}
 			base.OnHit();
-			SplitEnemy();
 		}
 
 		protected override void OnHit() {
@@ -68,6 +67,7 @@ namespace Enemies {
 
 		public void Explode() {
 			Debug.LogFormat("BOOM! ");
+			SplitEnemy();
 			Kill(true);
 		}
 

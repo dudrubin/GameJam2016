@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
 	static private List<GameObject> existingGameObjects = new List<GameObject>();
 	static public Action<int> OnEnemiesChange;
 	static public Action<Enemy> OnEnemyKilled;
+	private static UnityEngine.Object xplosion;
 
 	protected float initHealth = 0;
 	private float health = 100;
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour {
 	float lastX = 0;
 	float currentX = 0;
 	Sequence healthSequence;
+
+	public bool ExplodeAtDeath = true;
 
 	public float Health {
 		set {
@@ -58,6 +61,15 @@ public class Enemy : MonoBehaviour {
 	void OnDestroy() {
 		BeforeDestroyed();
 		TOTAL_ENEMIES--;
+
+		if (ExplodeAtDeath) {
+
+			GameObject s = Instantiate(xplosion) as GameObject;
+			s.transform.SetParent(transform.parent);
+			s.transform.localPosition = transform.localPosition;
+		}
+
+
 		existingGameObjects.Remove(gameObject);
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
@@ -69,6 +81,10 @@ public class Enemy : MonoBehaviour {
 
 
 	void Awake() {
+
+		if (xplosion == null) {
+			xplosion= Resources.Load("Prefabs/enemyXplostion");
+		}
 
 		initHealth = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");
@@ -187,9 +203,17 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public static void KillAll() {
-		foreach (GameObject existingGameObject in existingGameObjects) {
-			GameObject.Destroy(existingGameObject);
+
+		Sequence s = DOTween.Sequence();
+		for (int i = 0; i < existingGameObjects.Count; i++) {
+			GameObject existingGameObject = existingGameObjects[i];
+			existingGameObject.GetComponent<Enemy>().ExplodeAtDeath = false;
+			s.AppendCallback(()=>GameObject.Destroy(existingGameObject));
+			s.AppendInterval(0.002f);
 		}
+
+		s.AppendCallback(existingGameObjects.Clear);
+
 	}
 
 
