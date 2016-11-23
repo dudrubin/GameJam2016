@@ -34,6 +34,7 @@ namespace Enemies {
 				hitTween.Kill(false);
 			}
 			base.OnHit();
+			SplitEnemy();
 		}
 
 		protected override void OnHit() {
@@ -49,6 +50,7 @@ namespace Enemies {
 					images[i].GetComponent<SpriteRenderer>().enabled = true;
 				}
 			});
+
 		}
 
 		private void Evolve() {
