@@ -19,7 +19,9 @@ public class Main : MonoBehaviour {
 	WindSheild glass;
 
 	GameObject startScreen;
+	GameObject endScreen;
 	Button startButton;
+	Button restartButton;
 
 
 	// Use this for initialization
@@ -27,12 +29,16 @@ public class Main : MonoBehaviour {
 		CreateBreakSteps();
 		glass = GameObject.Find("Windshield").GetComponent<WindSheild>();
 		startScreen  = GameObject.Find("StartScreen");
+		endScreen  = GameObject.Find("EndScreen");
 		startButton = GameObject.Find("StartButton").GetComponent<Button>();
+		restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
 		emittersControl = GameObject.Find("Emitters").GetComponent<EmittersControl>();
 		creaturesCount = transform.FindChild("HUD/CreaturesCount");
 		Enemy.OnEnemiesChange += OnEnemiesChange;
 		Enemy.OnEnemyKilled += OnEnemyKilled;
 		startButton.onClick.AddListener(OnStartGameClicked);
+		restartButton.onClick.AddListener(OnReStartGameClicked);
+		endScreen.SetActive(false);
 		//upgradeButton.onClick.AddListener(UpgradeWeapon);
 		InitCannon();
 	}
@@ -81,8 +87,8 @@ public class Main : MonoBehaviour {
 		float ratio = Mathf.Min((float)count / MAX_CREATURES, 1);
 		creaturesCount.DOScaleY(ratio, 0.1f);
 		Debug.LogFormat("Enemies Count {0} ", count);
-		//check if bbreaking windshield
-		if (breakSteps.Count > 0 && count >= breakSteps.Peek()) {
+		//check if breaking windshield
+		if (breakSteps.Count > 0 && count > breakSteps.Peek()) {
 			glass.Damage++;
 			breakSteps.Dequeue();
 		}
@@ -97,12 +103,18 @@ public class Main : MonoBehaviour {
 	}
 
 	public void OnGameOver() {
+		endScreen.SetActive(true);
+		CanvasGroup canvasGroup =  endScreen.GetComponent<CanvasGroup>();
+		canvasGroup.alpha = 0;
+		canvasGroup.DOFade(1,0.5f);
 		Debug.LogFormat("GameOver");
 		emittersControl.StopEmitting();
 	}
 
 	public void StartGame() {
+		glass.ResetGlass();
 		startScreen.SetActive(false);
+		endScreen.SetActive(false);
 		emittersControl.StartEmitting();
 	}
 
@@ -127,6 +139,11 @@ public class Main : MonoBehaviour {
 
 	public void OnStartGameClicked() {
 		CanvasGroup canvasGroup =  startScreen.GetComponent<CanvasGroup>();
+		canvasGroup.DOFade(0,0.5f).OnComplete(StartGame);
+	}
+
+	public void OnReStartGameClicked() {
+		CanvasGroup canvasGroup =  endScreen.GetComponent<CanvasGroup>();
 		canvasGroup.DOFade(0,0.5f).OnComplete(StartGame);
 	}
 }
