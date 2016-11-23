@@ -10,6 +10,7 @@ public class Cannon : MonoBehaviour {
 	protected CannonProperties cannonProperties;
 
 	private float lifetime = 1.0f;
+	private bool mouseDown = false;
 	// Use this for initialization
 	void Start () {
 		Init ();
@@ -46,18 +47,31 @@ public class Cannon : MonoBehaviour {
 	protected bool getTouchPos(out Vector2 touchPos){
 		touchPos = new Vector2();
 		for (var i = 0; i < Input.touchCount; ++i) {
-			if (Input.GetTouch (i).phase == TouchPhase.Began) {
+			if (Input.GetTouch (i).phase == TouchPhase.Moved || 
+				Input.GetTouch (i).phase == TouchPhase.Began ||
+				Input.GetTouch (i).phase == TouchPhase.Stationary) {
 				touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch (i).position);
 				Debug.LogFormat ("touch detected {0},{1}", touchPos.x, touchPos.y);
 				return true;
 			}
 		}
-		if (Input.GetMouseButtonDown(0)){
+		updateMouseStatus ();
+	
+		if (mouseDown){
 			touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 			Debug.LogFormat ("click detected {0},{1}", touchPos.x, touchPos.y);
 			return true;
 		}
+
 		return false;
+	}
+
+	private void updateMouseStatus(){
+		if (Input.GetMouseButtonDown(0))
+			mouseDown = true;
+		
+		if (Input.GetMouseButtonUp(0))
+			mouseDown = false;
 	}
 
 	public virtual void InitiateStylishExit(){
