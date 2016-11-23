@@ -19,6 +19,7 @@ public class BaseCannonFire
 	public virtual void RespondToInput(Vector2[] touchPoints){
 		
 		if (touchPoints.Length > 0) {
+			Sounds.Play("laser");
 			foreach (Transform barrelTransform in barrelTransforms) {
 				Vector3 angle = barrelTransform.parent.localEulerAngles;
 				string projectilePrefabName = Projectile.getPrefabName (this.CannonProperties.projectileType);
