@@ -32,6 +32,10 @@ public class Main : MonoBehaviour {
 		restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
 		emittersControl = GameObject.Find("Emitters").GetComponent<EmittersControl>();
 		creaturesCount = transform.FindChild("HUD/CreaturesCount");
+		upgradeButton = GameObject.Find ("UpgradeButton").GetComponent<Button>();
+		moneyLabel = GameObject.Find ("Money").GetComponent<Text>();
+		cannonLevelLabel = GameObject.Find ("CannonLevel").GetComponent<Text>();
+		upgradeCost = GameObject.Find ("UpgradeCost").GetComponent<Text>();
 		Enemy.OnEnemiesChange += OnEnemiesChange;
 		Enemy.OnEnemyKilled += OnEnemyKilled;
 		startButton.onClick.AddListener(OnStartGameClicked);
@@ -43,7 +47,7 @@ public class Main : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		moneyLabel.text = this.money.ToString();
+		moneyLabel.text = string.Format("${0}", this.money.ToString());
 		if (cannonLevel < Cannons.cannonList.Length - 1)
 			upgradeCost.text = string.Format("UPGRADE COST:${0}", this.nextUpgradeCost());
 		else {
