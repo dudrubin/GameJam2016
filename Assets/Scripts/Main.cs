@@ -156,6 +156,10 @@ public class Main : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		this.cannonLevel = 1;
+		this.money = 0;
+		glass.Damage = 0;
+
 		timeStarted = DateTime.Now;
 		glass.ResetGlass();
 		startScreen.SetActive(false);
