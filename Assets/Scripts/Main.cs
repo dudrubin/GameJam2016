@@ -5,24 +5,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Main : MonoBehaviour {
 
-	Transform creaturesCount;
 	const int MAX_CREATURES = 13;
 	int money = 10000;
 	int cannonLevel = 1;
-	EmittersControl emittersControl;
 	public Button upgradeButton;
 	public Text moneyLabel;
 	public Text upgradeCost;
 	public Text cannonLevelLabel;
+	Transform creaturesCount;
+	EmittersControl emittersControl;
 	GameObject cannonObj;
 	Queue<int> breakSteps;
 	WindSheild glass;
-
 	GameObject startScreen;
 	GameObject endScreen;
 	Button startButton;
 	Button restartButton;
-
 
 	// Use this for initialization
 	void Awake() {
