@@ -48,21 +48,29 @@
      <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenAnimationInspector.cs" />
      <Compile Include="Assets\Editor\UnityConsulo\SimpleJSON.cs" />
      <Compile Include="Assets\Editor\UnityConsulo\UnityConsulo.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX\Editor\CFX_InspectorHelpEditor.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX\Editor\CFX_SpawnSystemEditor.cs" />
      <Compile Include="Assets\SpriteMask\Scripts\Editor\ClearStencilBufferComponentEditor.cs" />
      <Compile Include="Assets\SpriteMask\Scripts\Editor\SpriteMaskEditor.cs" />
      <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
+     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
      <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
      <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\SpriteMask\Readme.txt" />
      <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\SpriteMask\Resources\ClearStencil.shader" />
+     <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
      <None Include="Assets\SpriteMask\Resources\SpriteMask.shader" />
+     <None Include="Assets\JMO Assets\!JMO Assets Readme.txt" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
      <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\SpriteMask\Resources\SpriteDefault.shader" />
      <None Include="Assets\SpriteMask\Resources\SpriteDiffuse.shader" />
      <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.xml" />
      <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
+     <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Readme.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -128,6 +136,9 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="JMOAssets">
+ <HintPath>/Users/davidrubin/Projects/GameJam2016/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

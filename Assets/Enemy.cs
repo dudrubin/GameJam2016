@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
 	static private List<GameObject> existingGameObjects = new List<GameObject>();
 	static public Action<int> OnEnemiesChange;
 	static public Action<Enemy> OnEnemyKilled;
+	private static UnityEngine.Object xplosion;
 
 	protected float initHealth = 0;
 	private float health = 100;
@@ -58,6 +59,11 @@ public class Enemy : MonoBehaviour {
 	void OnDestroy() {
 		BeforeDestroyed();
 		TOTAL_ENEMIES--;
+
+		GameObject s = Instantiate(xplosion) as GameObject;
+		s.transform.SetParent(transform.parent);
+		s.transform.localPosition = transform.localPosition;
+
 		existingGameObjects.Remove(gameObject);
 		if (OnEnemiesChange != null) {
 			OnEnemiesChange(TOTAL_ENEMIES);
@@ -69,6 +75,10 @@ public class Enemy : MonoBehaviour {
 
 
 	void Awake() {
+
+		if (xplosion == null) {
+			xplosion= Resources.Load("Prefabs/enemyXplostion");
+		}
 
 		initHealth = Health;
 		healthBar = transform.FindChild("Canvas/HealthBar");

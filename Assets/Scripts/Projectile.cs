@@ -5,12 +5,20 @@ public class Projectile : MonoBehaviour {
 	Vector2 velocity;
 	private float lifeTime = 2;
 	private float damage;
+	private static Object xplosion;
 	// Use this for initialization
 	void Start() {
+
+		if (xplosion == null) {
+			xplosion= Resources.Load("Prefabs/enemyXplostion");
+		}
 		Invoke("Kill", lifeTime);
 	}
 
 	void Kill() {
+		GameObject s = Instantiate(xplosion) as GameObject;
+		s.transform.SetParent(transform.parent);
+		s.transform.localPosition = transform.localPosition;
 		Destroy(gameObject);
 	}
 
